@@ -710,18 +710,6 @@ function main(config) {
     })
   }
 
-  if (ruleOptions.disney) {
-    rules.push('GEOSITE,disney,Disney+')
-    config['proxy-groups'].push({
-      ...groupBaseOption,
-      name: 'Disney+',
-      type: 'select',
-      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
-      url: 'https://disney.api.edge.bamgrid.com/devices',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Disney+.png'
-    })
-  }
-
   if (ruleOptions.netflix) {
     rules.push('GEOSITE,netflix,NETFLIX')
     config['proxy-groups'].push({
@@ -755,6 +743,18 @@ function main(config) {
       proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
       url: 'https://auth.hulu.com/v4/web/password/authenticate',
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hulu.png'
+    })
+  }
+
+  if (ruleOptions.disney) {
+    rules.push('GEOSITE,disney,Disney+')
+    config['proxy-groups'].push({
+      ...groupBaseOption,
+      name: 'Disney+',
+      type: 'select',
+      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
+      url: 'https://disney.api.edge.bamgrid.com/devices',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Disney+.png'
     })
   }
 
@@ -925,10 +925,11 @@ function main(config) {
     })
   }
 
-  if (ruleOptions.apple) {
+  if (ruleOptions.cloudflare) {
     rules.push(
       'GEOIP,cloudflare,Cloudflare',
       'GEOSITE,cloudflare,Cloudflare',
+      'GEOSITE,cloudflare@cn,Cloudflare',
       'GEOSITE,cloudflare-cn,Cloudflare'
     )
     config['proxy-groups'].push({
@@ -1014,10 +1015,10 @@ function main(config) {
   }
 
   rules.push(
-    'GEOSITE,gfw,GFW列表',
-    'GEOSITE,greatfire,GFW列表',
     'GEOSITE,private,DIRECT',
     'GEOIP,private,DIRECT,no-resolve',
+    'GEOSITE,gfw,GFW列表',
+    'GEOSITE,greatfire,GFW列表',
     'GEOSITE,cn,国内网站',
     'GEOIP,cn,国内网站,no-resolve',
     'GEOSITE,geolocation-!cn,境外网站',
@@ -1052,19 +1053,6 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      name: '漏网之鱼',
-      type: 'select',
-      proxies: [
-        '直连',
-        '默认节点',
-        '国内网站',
-        '境外网站',
-        ...proxyGroupsRegionNames
-      ],
-      icon: 'https://cdn-icons-png.flaticon.com/128/10507/10507711.png'
-    },
-    {
-      ...groupBaseOption,
       name: '国内网站',
       type: 'select',
       proxies: [
@@ -1085,6 +1073,19 @@ function main(config) {
         ...proxyGroupsRegionNames
       ],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Streaming!CN.png'
+    },
+    {
+      ...groupBaseOption,
+      name: '漏网之鱼',
+      type: 'select',
+      proxies: [
+        '直连',
+        '默认节点',
+        '国内网站',
+        '境外网站',
+        ...proxyGroupsRegionNames
+      ],
+      icon: 'https://cdn-icons-png.flaticon.com/128/10507/10507711.png'
     }
   )
 
