@@ -22,8 +22,8 @@ const ruleOptions = {
   google: true, // Google服务
   cloudflare: true, //Cloudflare服务
   openai: true, // 国外AI和GPT
-  spotify: true, // Spotify
   spotifyplay: true, // Spotify 播放
+  spotify: true, // Spotify
   steamdl: true, // Steam下载
   steam: true, //Steam商店/社区
   epicgamesdl: true, // Epic Games下载
@@ -603,6 +603,41 @@ function main(config) {
     })
   }
 
+  if (ruleOptions.spotifyplay) {
+    rules.push(
+      'DOMAIN-SUFFIX,spotifycdn.net,Spotify 播放',
+      'DOMAIN-KEYWORD,spotifycdn,Spotify 播放',
+      'DOMAIN-SUFFIX,spotifycdn.com,Spotify 播放',
+      'DOMAIN-SUFFIX,pscdn.co,Spotify 播放',
+      'DOMAIN-SUFFIX,scdn.co,Spotify 播放',
+      'DOMAIN-SUFFIX,audio-ak.spotifycdn.com,Spotify 播放',
+      'DOMAIN-SUFFIX,audio-akp-bbr-spotify-com.akamaized.net,Spotify 播放',
+      'DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,Spotify 播放',
+      'DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,Spotify 播放',
+      'DOMAIN-SUFFIX,heads-ak-spotify-com.akamaized.net,Spotify 播放'
+    )
+    config['proxy-groups'].push({
+      ...groupBaseOption,
+      name: 'Spotify 播放',
+      type: 'select',
+      proxies: ['直连', '默认节点', ...proxyGroupsRegionNames],
+      url: 'http://spclient.wg.spotify.com/signup/public/v1/account',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Spotify.png'
+    })
+  }
+
+  if (ruleOptions.spotify) {
+    rules.push('GEOSITE,spotify,Spotify')
+    config['proxy-groups'].push({
+      ...groupBaseOption,
+      name: 'Spotify',
+      type: 'select',
+      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
+      url: 'http://spclient.wg.spotify.com/signup/public/v1/account',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Spotify.png'
+    })
+  }
+
   if (ruleOptions.youtube) {
     rules.push('GEOSITE,youtube,YouTube')
     config['proxy-groups'].push({
@@ -612,6 +647,18 @@ function main(config) {
       proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
       url: 'https://www.youtube.com/s/desktop/494dd881/img/favicon.ico',
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/YouTube.png'
+    })
+  }
+
+  if (ruleOptions.tiktok) {
+    rules.push('GEOSITE,tiktok,Tiktok')
+    config['proxy-groups'].push({
+      ...groupBaseOption,
+      name: 'Tiktok',
+      type: 'select',
+      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
+      url: 'https://www.tiktok.com/',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png'
     })
   }
 
@@ -687,50 +734,27 @@ function main(config) {
     })
   }
 
-  if (ruleOptions.tiktok) {
-    rules.push('GEOSITE,tiktok,Tiktok')
+  if (ruleOptions.primevideo) {
+    rules.push('GEOSITE,primevideo,Prime Video')
     config['proxy-groups'].push({
       ...groupBaseOption,
-      name: 'Tiktok',
+      name: 'Prime Video',
       type: 'select',
       proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
-      url: 'https://www.tiktok.com/',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png'
+      url: 'https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Prime_Video.png'
     })
   }
 
-  if (ruleOptions.spotifyplay) {
-    rules.push(
-      'DOMAIN-SUFFIX,spotifycdn.net,Spotify 播放',
-      'DOMAIN-KEYWORD,spotifycdn,Spotify 播放',
-      'DOMAIN-SUFFIX,spotifycdn.com,Spotify 播放',
-      'DOMAIN-SUFFIX,pscdn.co,Spotify 播放',
-      'DOMAIN-SUFFIX,scdn.co,Spotify 播放',
-      'DOMAIN-SUFFIX,audio-ak.spotifycdn.com,Spotify 播放',
-      'DOMAIN-SUFFIX,audio-akp-bbr-spotify-com.akamaized.net,Spotify 播放',
-      'DOMAIN-SUFFIX,audio4-ak-spotify-com.akamaized.net,Spotify 播放',
-      'DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net,Spotify 播放',
-      'DOMAIN-SUFFIX,heads-ak-spotify-com.akamaized.net,Spotify 播放'
-    )
+  if (ruleOptions.hulu) {
+    rules.push('GEOSITE,hulu,Hulu')
     config['proxy-groups'].push({
       ...groupBaseOption,
-      name: 'Spotify 播放',
-      type: 'select',
-      proxies: ['直连', '默认节点', ...proxyGroupsRegionNames],
-      url: 'http://spclient.wg.spotify.com/signup/public/v1/account',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Spotify.png'
-    })
-  }
-
-  if (ruleOptions.spotify) {
-    rules.push('GEOSITE,spotify,Spotify')
-    config['proxy-groups'].push({
-      ...groupBaseOption,
-      name: 'Spotify',
+      name: 'Hulu',
       type: 'select',
       proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
-      url: 'http://spclient.wg.spotify.com/signup/public/v1/account',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Spotify.png'
+      url: 'https://auth.hulu.com/v4/web/password/authenticate',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hulu.png'
     })
   }
 
@@ -767,30 +791,6 @@ function main(config) {
       proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
       url: 'https://www.tvb.com/logo_b.svg',
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TVB.png'
-    })
-  }
-
-  if (ruleOptions.primevideo) {
-    rules.push('GEOSITE,primevideo,Prime Video')
-    config['proxy-groups'].push({
-      ...groupBaseOption,
-      name: 'Prime Video',
-      type: 'select',
-      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
-      url: 'https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Prime_Video.png'
-    })
-  }
-
-  if (ruleOptions.hulu) {
-    rules.push('GEOSITE,hulu,Hulu')
-    config['proxy-groups'].push({
-      ...groupBaseOption,
-      name: 'Hulu',
-      type: 'select',
-      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
-      url: 'https://auth.hulu.com/v4/web/password/authenticate',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hulu.png'
     })
   }
 
