@@ -758,18 +758,6 @@ function main(config) {
     })
   }
 
-  if (ruleOptions.pixiv) {
-    rules.push('GEOSITE,pixiv,Pixiv')
-    config['proxy-groups'].push({
-      ...groupBaseOption,
-      name: 'Pixiv',
-      type: 'select',
-      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
-      url: 'https://www.pixiv.net/',
-      icon: 'https://s.pximg.net/common/images/apple-touch-icon.png?20250206'
-    })
-  }
-
   if (ruleOptions.hbo) {
     rules.push('GEOSITE,hbo,HBO')
     config['proxy-groups'].push({
@@ -791,6 +779,18 @@ function main(config) {
       proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
       url: 'https://www.tvb.com/logo_b.svg',
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TVB.png'
+    })
+  }
+
+  if (ruleOptions.pixiv) {
+    rules.push('GEOSITE,pixiv,Pixiv')
+    config['proxy-groups'].push({
+      ...groupBaseOption,
+      name: 'Pixiv',
+      type: 'select',
+      proxies: ['默认节点', ...proxyGroupsRegionNames, '直连'],
+      url: 'https://www.pixiv.net/',
+      icon: 'https://s.pximg.net/common/images/apple-touch-icon.png?20250206'
     })
   }
 
