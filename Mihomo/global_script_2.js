@@ -17,44 +17,44 @@ const enable = true
  * false = 禁用
  */
 const ruleOptions = {
-  apple: true, // 苹果服务
-  microsoft: true, // 微软服务
-  google: true, // Google服务
   cloudflare: true, //Cloudflare服务
+  apple: true, // 苹果服务
+  google: true, // Google服务
+  microsoft: true, // 微软服务
   openai: true, // 国外AI和GPT
-  spotifyplay: true, // Spotify 播放
-  spotify: true, // Spotify
-  steamdl: true, // Steam下载
-  steam: true, //Steam商店/社区
-  epicgamesdl: true, // Epic Games下载
-  epicgames: true, //Epic Games商店
-  youtube: true, // YouTube
-  niconico: true, //niconico
-  bahamut: true, // 巴哈姆特/动画疯
-  netflix: true, // Netflix网飞
-  tiktok: true, // 国际版抖音
-  disney: true, // 迪士尼
-  pixiv: true, // Pixiv
-  hbo: true, // HBO
-  bilibili:true, // 哔哩哔哩
-  biliintl: true, // 哔哩哔哩 东南亚
   mihoyodl: true, //miHoYo下载
   mihoyo: true, //miHoYo
   hoyolab: true, //miHoYo海外社区/登录
   hoyoverse: true, //miHoYo海外
-  tvb: true, // TVB
-  hulu: true, // Hulu
+  steamdl: true, // Steam下载
+  steam: true, //Steam商店/社区
+  epicgamesdl: true, // Epic Games下载
+  epicgames: true, //Epic Games商店
+  spotifyplay: true, // Spotify 播放
+  spotify: true, // Spotify
+  youtube: true, // YouTube
+  tiktok: true, // 国际版抖音
+  biliintl: true, // 哔哩哔哩 东南亚
+  bilibili: true, // 哔哩哔哩
+  niconico: true, //niconico
+  bahamut: true, // 巴哈姆特/动画疯
+  netflix: true, // Netflix网飞
   primevideo: true, // 亚马逊prime video
-  twitter: true, // 推特
-  facebook: true, // 脸书
+  hulu: true, // Hulu
+  disney: true, // 迪士尼
+  pixiv: true, // Pixiv
+  hbo: true, // HBO
+  tvb: true, // TVB
+  twitter: true, // Twitter
+  facebook: true, // Facebook
   discord: true, // Discord通讯软件
   telegram: true, // Telegram通讯软件
+  whatsapp: true, // Whatsapp通讯软件
   line: true, // Line通讯软件
-  whatsapp: true, // Whatsapp
   games: true, // 游戏策略组
   japan: true, // 日本网站策略组
   tracker: true, // 网络分析和跟踪服务
-  ads: true, // 常见的网络广告
+  ads: true // 常见的网络广告
 }
 
 /**
@@ -662,18 +662,6 @@ function main(config) {
     })
   }
 
-  if (ruleOptions.bilibili) {
-    rules.push('GEOSITE,bilibili,哔哩哔哩')
-    config['proxy-groups'].push({
-      ...groupBaseOption,
-      name: '哔哩哔哩',
-      type: 'select',
-      proxies: ['直连', '默认节点', ...proxyGroupsRegionNames],
-      url: 'https://www.bilibili.com/',
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png'
-    })
-  }
-
   if (ruleOptions.biliintl) {
     rules.push('GEOSITE,biliintl,哔哩哔哩 东南亚')
     config['proxy-groups'].push({
@@ -683,6 +671,18 @@ function main(config) {
       proxies: ['默认节点', '直连', ...proxyGroupsRegionNames],
       url: 'https://www.bilibili.tv/',
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili_3.png'
+    })
+  }
+
+  if (ruleOptions.bilibili) {
+    rules.push('GEOSITE,bilibili,哔哩哔哩')
+    config['proxy-groups'].push({
+      ...groupBaseOption,
+      name: '哔哩哔哩',
+      type: 'select',
+      proxies: ['直连', '默认节点', ...proxyGroupsRegionNames],
+      url: 'https://www.bilibili.com/',
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/bilibili.png'
     })
   }
 
